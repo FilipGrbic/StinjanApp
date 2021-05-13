@@ -12,6 +12,7 @@ CREATE TABLE `stinjan_app`.`trip` (
   `tripId` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `price` INT DEFAULT NULL,
+  `image` BLOB,
   `description` VARCHAR(200) DEFAULT NULL,
   PRIMARY KEY (`tripId`));
   
@@ -34,6 +35,7 @@ CREATE TABLE `stinjan_app`.`apartment` (
 CREATE TABLE `stinjan_app`.`lunch` (
 	`lunchId` INT NOT NULL AUTO_INCREMENT,
     `price` INT NOT NULL,
+    `image` BLOB,
     `description` VARCHAR(200) DEFAULT NULL,
     PRIMARY KEY (`lunchId`)
 );
