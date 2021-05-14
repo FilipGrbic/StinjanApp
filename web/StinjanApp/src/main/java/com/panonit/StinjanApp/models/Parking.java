@@ -23,4 +23,13 @@ public class Parking {
 	
 	@Column(name="available")
 	private boolean available;
+
+	public Parking() {
+	}
+
+	public Parking(int parkingId, boolean available) {
+		super();
+		this.parkingId = parkingId;
+		this.available = available;
+	}
 }
