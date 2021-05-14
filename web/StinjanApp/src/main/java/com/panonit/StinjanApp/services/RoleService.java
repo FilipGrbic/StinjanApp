@@ -24,8 +24,7 @@ public class RoleService {
 	}
 	
 	public Role saveRole(Role role) {
-		Role rol = roleRepository.save(role);
-		return rol;
+		return roleRepository.save(role);
 	}
 	
 	public Role updateRole(Role role, Integer roleId) {
