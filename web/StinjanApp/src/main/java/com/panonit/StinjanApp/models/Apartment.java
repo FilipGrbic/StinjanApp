@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,22 +19,27 @@ import lombok.Setter;
 public class Apartment {
 	
 	@Id
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="apartmentId")
 	int apartmentId;
 	
+	@NotNull
 	@Column(name="num_of_rooms")
 	private int num_of_rooms;
 	
+	@NotNull
 	@Column(name="num_of_beds")
 	private int num_of_beds;
 	
+	@Size(max=200)
 	@Column(name="description")
 	private String description;
 	
 	@Column(name="image")
 	private byte[] image;
 	
+	@NotNull
 	@Column(name="price_per_night")
 	private int price_per_night;
 	
