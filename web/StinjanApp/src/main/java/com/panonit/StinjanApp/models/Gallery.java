@@ -11,25 +11,29 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="parking")
+@Table(name="gallery")
 @Getter
 @Setter
-public class Parking {
+public class Gallery {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="parkingId")
-	int parkingId;
+	@Column(name="imgId")
+	int imgId;
 	
-	@Column(name="available")
-	private boolean available;
-
-	public Parking() {
+	@Column(name="img")
+	private byte[] img;
+	
+	@Column(name="description")
+	private String description;
+	
+	public Gallery() {
 	}
 
-	public Parking(int parkingId, boolean available) {
+	public Gallery(int imgId, byte[] img, String description) {
 		super();
-		this.parkingId = parkingId;
-		this.available = available;
+		this.imgId = imgId;
+		this.img = img;
+		this.description = description;
 	}
 }
