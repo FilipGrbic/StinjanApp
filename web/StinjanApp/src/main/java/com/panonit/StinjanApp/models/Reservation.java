@@ -1,6 +1,6 @@
 package com.panonit.StinjanApp.models;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,29 +25,36 @@ import lombok.Setter;
 public class Reservation {
 	
 	@Id
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "reservationId")
 	int reservationId;
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dateFrom")
 	private Date dateFrom;
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
-	@Column(name = "dateFrom")
+	@Column(name = "dateTo")
 	private Date dateTo;
 	
+	@NotNull
 	@Column(name="totalPrice")
 	private int totalPrice;
 	
-	@OneToOne
+	@NotNull
+	@ManyToOne
 	@JoinColumn(name = "tripId")
 	Trip trip;
 	
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "parkingId")
 	Parking parking;
 	
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "apartmentId")
 	Apartment apartment;

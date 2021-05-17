@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import lombok.Setter;
 public class Permission {
 	
 	@Id
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "permissionId")
 	int permissionId;

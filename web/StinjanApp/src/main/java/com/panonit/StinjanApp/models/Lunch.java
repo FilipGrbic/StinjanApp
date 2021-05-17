@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,16 +19,19 @@ import lombok.Setter;
 public class Lunch {
 	
 	@Id
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="lunchId")
 	int lunchId;
 	
+	@NotNull
 	@Column(name="price")
 	private int price;
 	
 	@Column(name="image")
 	private byte[] image;
 	
+	@Size(max=200)
 	@Column(name="description")
 	private String description;
 	
