@@ -24,8 +24,7 @@ public class GalleryService {
 	}
 	
 	public Gallery saveImage(Gallery gallery) {
-		Gallery img = galleryRepository.save(gallery);
-		return img;
+		return galleryRepository.save(gallery);
 	}
 	
 	public Gallery updateImage(Gallery newGallery, Integer imgId) {
