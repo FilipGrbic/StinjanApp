@@ -14,6 +14,8 @@ import {TripsService} from './services/trips.service';
 import {LunchService} from './services/lunch.service';
 import {ApartmentsService} from './services/apartments.service';
 import { AboutComponent } from './components/about/about.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { AboutComponent } from './components/about/about.component';
     TripsComponent,
     LunchComponent,
     GalleryComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
