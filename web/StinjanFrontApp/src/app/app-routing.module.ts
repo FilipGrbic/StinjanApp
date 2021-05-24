@@ -5,7 +5,9 @@ import { ApartmentsComponent } from './components/apartments/apartments.componen
 import { ContactComponent } from './components/contact/contact.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
 import { LunchComponent } from './components/lunch/lunch.component';
+import { RegisterComponent } from './components/register/register.component';
 import { TripsComponent } from './components/trips/trips.component';
 
 const routes: Routes = [
@@ -15,7 +17,9 @@ const routes: Routes = [
   {path: 'lunch', component: LunchComponent},
   {path: 'trips', component: TripsComponent},
   {path: 'gallery', component: GalleryComponent},
-  {path: 'contact', component: ContactComponent}
+  {path: 'contact', component: ContactComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent}
 ];
 
 @NgModule({

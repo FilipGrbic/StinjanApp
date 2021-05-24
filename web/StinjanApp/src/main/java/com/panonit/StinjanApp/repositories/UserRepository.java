@@ -7,5 +7,5 @@ import com.panonit.StinjanApp.models.User;
 
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User,Integer>{
-
+	User findUserByUsername(String username);
 }
