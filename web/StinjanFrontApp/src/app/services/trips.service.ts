@@ -11,7 +11,7 @@ export class TripsService {
   private tripsURL: string;
 
   constructor(private httpClient: HttpClient) { 
-    this.tripsURL = 'http://localhost:4063/trips/list';
+    this.tripsURL = 'http://localhost:4063/trip/list';
   }
 
   getTripsList(): Observable<Trips[]>{
