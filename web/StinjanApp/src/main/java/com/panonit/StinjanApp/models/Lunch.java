@@ -25,6 +25,10 @@ public class Lunch {
 	int lunchId;
 	
 	@NotNull
+	@Column(name="title")
+	private String title;
+	
+	@NotNull
 	@Column(name="price")
 	private int price;
 	

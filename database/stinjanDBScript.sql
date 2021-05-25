@@ -34,6 +34,7 @@ CREATE TABLE `stinjan_app`.`apartment` (
 
 CREATE TABLE `stinjan_app`.`lunch` (
 	`lunchId` INT NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(45) NOT NULL,
     `price` INT NOT NULL,
     `image` BLOB,
     `description` VARCHAR(200) DEFAULT NULL,
