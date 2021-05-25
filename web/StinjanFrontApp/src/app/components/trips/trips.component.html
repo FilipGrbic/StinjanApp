@@ -1,0 +1,21 @@
+<div class="container" style="padding-top: 5%;">
+    <h1><b>Travel and meet Istria</b></h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Price (in €)</th>  
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let trip of trips">
+                <td>{{trip.title}}</td>
+                <td>{{trip.description}}</td>
+                <td>{{trip.image}}</td>
+                <td>{{trip.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

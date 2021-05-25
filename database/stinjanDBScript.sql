@@ -75,6 +75,7 @@ CREATE TABLE `stinjan_app`.`user` (
     `surname` VARCHAR(50) NOT NULL,
     `country` VARCHAR(50) DEFAULT NULL,
     `city` VARCHAR(50) DEFAULT NULL,
+    `address` VARCHAR(50) DEFAULT NULL,
     `email` VARCHAR(50) NOT NULL,
     `phone` VARCHAR(50) NOT NULL,
     `username` VARCHAR(50) NOT NULL,
