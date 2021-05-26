@@ -1,1 +1,21 @@
-<p>lunch works!</p>
+<div class="container" style="padding-top: 5%;">
+    <h1><b>Lunch with us</b></h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Price (in €)</th>  
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let lunch of lunches">
+                <td>{{lunch.title}}</td>
+                <td>{{lunch.description}}</td>
+                <td>{{lunch.image}}</td>
+                <td>{{lunch.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
