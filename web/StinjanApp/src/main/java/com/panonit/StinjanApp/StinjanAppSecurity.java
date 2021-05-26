@@ -3,16 +3,12 @@ package com.panonit.StinjanApp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
 import com.panonit.StinjanApp.services.UserService;
 
 @Configuration
@@ -23,7 +19,10 @@ public class StinjanAppSecurity extends WebSecurityConfigurerAdapter {
 	UserService userService;
 	
 	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	StinjanAppUserDetailsService userDetailsService;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public BCryptPasswordEncoder getbCryptPasswordEncoder() {
 		return bCryptPasswordEncoder;
@@ -35,7 +34,16 @@ public class StinjanAppSecurity extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		super.configure(auth);
+		auth.authenticationProvider(authenticationProvider());
+	}
+	
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService);
+		authProvider.setPasswordEncoder(bCryptPasswordEncoder);
+		
+		return authProvider;
 	}
 
 	@Override
@@ -54,6 +62,7 @@ public class StinjanAppSecurity extends WebSecurityConfigurerAdapter {
 		.httpBasic();
 	}
 	
+	/*
 	@Override
 	@Bean
 	protected UserDetailsService userDetailsService() {
@@ -64,5 +73,5 @@ public class StinjanAppSecurity extends WebSecurityConfigurerAdapter {
 				.build();
 		
 		return new InMemoryUserDetailsManager(filipUser);
-	}
+	}*/
 }

@@ -83,4 +83,9 @@ html,body{
     
     .links a{
     margin-left: 4px;
+    
+    }
+    
+    .linkColor{
+        color: #17a2b8;
     }
