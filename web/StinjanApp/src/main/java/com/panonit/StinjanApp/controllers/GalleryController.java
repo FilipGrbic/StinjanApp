@@ -1,6 +1,10 @@
 package com.panonit.StinjanApp.controllers;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +59,20 @@ public class GalleryController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@GetMapping(value = "/showGalleryImage/{imgId}")
+	public void showGalleryImage(@PathVariable Integer imgId, HttpServletResponse response,
+			HttpServletRequest request) {
+
+		try {
+			Gallery gallery = galleryService.getById(imgId);
+			if(gallery.getImg() != null) {
+				response.getOutputStream().write(gallery.getImg());
+				response.getOutputStream().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

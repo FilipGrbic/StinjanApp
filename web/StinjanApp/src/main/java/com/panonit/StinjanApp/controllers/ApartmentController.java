@@ -1,6 +1,10 @@
 package com.panonit.StinjanApp.controllers;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +59,20 @@ public class ApartmentController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@GetMapping(value = "/showApartmentImage/{apartmentId}")
+	public void showApartmentImage(@PathVariable Integer apartmentId, HttpServletResponse response,
+			HttpServletRequest request) {
+
+		try {
+			Apartment apartment = apartmentService.getById(apartmentId);
+			if(apartment.getImage() != null) {
+				response.getOutputStream().write(apartment.getImage());
+				response.getOutputStream().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
