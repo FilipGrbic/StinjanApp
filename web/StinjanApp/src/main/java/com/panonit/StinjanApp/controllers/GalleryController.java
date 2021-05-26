@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.panonit.StinjanApp.models.Gallery;
 import com.panonit.StinjanApp.services.GalleryService;
@@ -74,5 +76,24 @@ public class GalleryController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@PostMapping(value = "/uploadGalleryImage/{imgId}")
+	public ResponseEntity<String> uploadGalleryImage(@RequestPart(value = "image") MultipartFile file,
+			@PathVariable(value = "imgId") Integer imgId, HttpServletResponse response,
+			HttpServletRequest request){
+		if (!file.isEmpty())
+			try {
+				byte[] bytes = file.getBytes();
+				
+				Gallery gallery = galleryService.getById(imgId);
+				gallery.setImg(bytes);
+				galleryService.saveImage(gallery);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>("Upload failed", HttpStatus.BAD_REQUEST);
+			}
+		return new ResponseEntity<String>("Upload success", HttpStatus.OK);
 	}
 }
