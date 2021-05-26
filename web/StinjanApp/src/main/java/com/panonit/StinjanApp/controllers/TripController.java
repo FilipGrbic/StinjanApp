@@ -1,7 +1,8 @@
 package com.panonit.StinjanApp.controllers;
 
 import java.util.List;
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.panonit.StinjanApp.models.Trip;
 import com.panonit.StinjanApp.services.TripService;
 
@@ -33,7 +35,7 @@ public class TripController {
 	}
 	
 	@GetMapping("/getById/{tripId}")
-	public Optional<Trip> getTripById(@PathVariable(value = "tripId") Integer tripId) {
+	public Trip getTripById(@PathVariable(value = "tripId") Integer tripId) {
 		return tripService.getTripById(tripId);
 	}
 	
@@ -59,5 +61,39 @@ public class TripController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@GetMapping(value = "/showTripImage/{tripId}")
+	public void showTripImage(@PathVariable Integer tripId, HttpServletResponse response,
+			HttpServletRequest request) {
+
+		try {
+			Trip trip = tripService.getTripById(tripId);
+			if(trip.getImage() != null) {
+				response.getOutputStream().write(trip.getImage());
+				response.getOutputStream().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping(value = "/uploadTripImage/{tripId}")
+	public ResponseEntity<String> UploadTripImage(@RequestPart(value = "image") MultipartFile file,
+			@PathVariable(value = "tripId") Integer tripId, HttpServletResponse response,
+			HttpServletRequest request){
+		if (!file.isEmpty())
+			try {
+				byte[] bytes = file.getBytes();
+				
+				Trip trip = tripService.getTripById(tripId);
+				trip.setImage(bytes);
+				tripService.saveTrip(trip);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>("Upload failed", HttpStatus.BAD_REQUEST);
+			}
+		return new ResponseEntity<String>("Upload success", HttpStatus.OK);
 	}
 }

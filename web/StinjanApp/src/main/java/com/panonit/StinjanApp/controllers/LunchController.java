@@ -1,7 +1,9 @@
 package com.panonit.StinjanApp.controllers;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +35,7 @@ public class LunchController {
 	}
 	
 	@GetMapping("/getById/{lunchId}")
-	public Optional<Lunch> getById(@PathVariable(value = "lunchId") Integer lunchId){
+	public Lunch getById(@PathVariable(value = "lunchId") Integer lunchId){
 		return lunchService.getById(lunchId);
 	}
 	
@@ -59,5 +61,20 @@ public class LunchController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@GetMapping(value = "/showLunchImage/{lunchId}")
+	public void showLunchImage(@PathVariable Integer lunchId, HttpServletResponse response,
+			HttpServletRequest request) {
+
+		try {
+			Lunch lunch = lunchService.getById(lunchId);
+			if(lunch.getImage() != null) {
+				response.getOutputStream().write(lunch.getImage());
+				response.getOutputStream().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

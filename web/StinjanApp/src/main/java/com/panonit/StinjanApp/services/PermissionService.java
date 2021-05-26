@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +17,8 @@ public class PermissionService {
 		return permissionRepository.findAll();
 	}
 	
-	public Optional<Permission> getById(Integer permissionId){
-		return permissionRepository.findById(permissionId);
+	public Permission getById(Integer permissionId){
+		return permissionRepository.findById(permissionId).get();
 	}
 	
 	public Permission savePermission(Permission permission) {

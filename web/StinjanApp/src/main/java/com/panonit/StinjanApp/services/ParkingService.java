@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +17,8 @@ public class ParkingService {
 		return parkingRepository.findAll();
 	}
 	
-	public Optional<Parking> getParkingById(Integer parkingId) {
-		return parkingRepository.findById(parkingId);
+	public Parking getParkingById(Integer parkingId) {
+		return parkingRepository.findById(parkingId).get();
 	}
 	
 	public Parking saveParking(Parking parking) {

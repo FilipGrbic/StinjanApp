@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +17,8 @@ public class RoleService {
 		return roleRepository.findAll();
 	}
 	
-	public Optional<Role> getById(Integer roleId){
-		return roleRepository.findById(roleId);
+	public Role getById(Integer roleId){
+		return roleRepository.findById(roleId).get();
 	}
 	
 	public Role saveRole(Role role) {

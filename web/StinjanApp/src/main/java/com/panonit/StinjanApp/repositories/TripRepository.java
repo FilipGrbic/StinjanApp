@@ -7,5 +7,4 @@ import com.panonit.StinjanApp.models.Trip;
 
 @Repository("tripRepository")
 public interface TripRepository extends JpaRepository<Trip, Integer> {
-	
 }
