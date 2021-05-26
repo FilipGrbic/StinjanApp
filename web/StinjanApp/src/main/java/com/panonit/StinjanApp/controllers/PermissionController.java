@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +29,7 @@ public class PermissionController {
 	}
 	
 	@GetMapping("/getById/{permissionId}")
-	public Optional<Permission> getById(@PathVariable(value = "permissionId") Integer permissionId){
+	public Permission getById(@PathVariable(value = "permissionId") Integer permissionId){
 		return permissionService.getById(permissionId);
 	}
 	

@@ -1,7 +1,9 @@
 package com.panonit.StinjanApp.controllers;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.panonit.StinjanApp.models.Gallery;
 import com.panonit.StinjanApp.services.GalleryService;
@@ -31,7 +35,7 @@ public class GalleryController {
 	}
 	
 	@GetMapping("/getById/{imgId}")
-	public Optional<Gallery> getById(@PathVariable(value = "imgId") Integer imgId){
+	public Gallery getById(@PathVariable(value = "imgId") Integer imgId){
 		return galleryService.getById(imgId);
 	}
 	
@@ -57,5 +61,39 @@ public class GalleryController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@GetMapping(value = "/showGalleryImage/{imgId}")
+	public void showGalleryImage(@PathVariable Integer imgId, HttpServletResponse response,
+			HttpServletRequest request) {
+
+		try {
+			Gallery gallery = galleryService.getById(imgId);
+			if(gallery.getImg() != null) {
+				response.getOutputStream().write(gallery.getImg());
+				response.getOutputStream().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping(value = "/uploadGalleryImage/{imgId}")
+	public ResponseEntity<String> uploadGalleryImage(@RequestPart(value = "image") MultipartFile file,
+			@PathVariable(value = "imgId") Integer imgId, HttpServletResponse response,
+			HttpServletRequest request){
+		if (!file.isEmpty())
+			try {
+				byte[] bytes = file.getBytes();
+				
+				Gallery gallery = galleryService.getById(imgId);
+				gallery.setImg(bytes);
+				galleryService.saveImage(gallery);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>("Upload failed", HttpStatus.BAD_REQUEST);
+			}
+		return new ResponseEntity<String>("Upload success", HttpStatus.OK);
 	}
 }

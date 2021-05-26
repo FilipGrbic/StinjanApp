@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +22,8 @@ public class UserService {
 		return userRepository.findAll();
 	}
 	
-	public Optional<User> getById(Integer userId){
-		return userRepository.findById(userId);
+	public User getById(Integer userId){
+		return userRepository.findById(userId).get();
 	}
 	
 	public User saveUser(User user) {
