@@ -1,20 +1,24 @@
 <div class="container" style="padding-top: 5%;">
-    <h1><b>Lunch with us</b></h1>
+    <h1><b>Lunch with us</b><button type="button" class="btn btn-dark" id="addLunchBtn">Add new lunch</button></h1>
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">Image</th>
-                <th scope="col">Price (in €)</th>  
+                <th scope="col">Price (in €)</th>
+                <th></th>
+                <th></th>  
             </tr>
         </thead>
         <tbody>
             <tr *ngFor = "let lunch of lunches">
                 <td>{{lunch.title}}</td>
                 <td>{{lunch.description}}</td>
-                <td>{{lunch.image}}</td>
+                <td id="lunchImage">{{lunch.image}}</td>
                 <td>{{lunch.price}}</td>
+                <td><button type="button" class="btn btn-info">Update</button></td>
+                <td><button type="button" class="btn btn-danger">Delete</button></td>
             </tr>
         </tbody>
     </table>

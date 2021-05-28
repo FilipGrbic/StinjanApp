@@ -59,11 +59,16 @@ public class Reservation {
 	@JoinColumn(name = "apartmentId")
 	Apartment apartment;
 	
+	@NotNull
+	@OneToOne
+	@JoinColumn(name= "userId")
+	User user;
+	
 	public Reservation() {
 	}
 
 	public Reservation(int reservationId, Date dateFrom, Date dateTo, int totalPrice, Trip trip, Parking parking,
-			Apartment apartment) {
+			Apartment apartment, User user) {
 		super();
 		this.reservationId = reservationId;
 		this.dateFrom = dateFrom;
@@ -72,5 +77,6 @@ public class Reservation {
 		this.trip = trip;
 		this.parking = parking;
 		this.apartment = apartment;
+		this.user = user;
 	}
 }

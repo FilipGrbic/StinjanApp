@@ -23,15 +23,19 @@ public class Parking {
 	@Column(name="parkingId")
 	int parkingId;
 	
+	@Column(name="serial_num")
+	private int serial_num;
+	
 	@Column(name="available")
 	private boolean available;
 
 	public Parking() {
 	}
 
-	public Parking(int parkingId, boolean available) {
+	public Parking(int parkingId, int serial_num, boolean available) {
 		super();
 		this.parkingId = parkingId;
+		this.serial_num = serial_num;
 		this.available = available;
 	}
 }

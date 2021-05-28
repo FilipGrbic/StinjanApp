@@ -18,6 +18,16 @@ public class UserService {
 		return user;
 	}
 	
+	public User findUserByEmail(String email) {
+		User user = userRepository.findUserByEmail(email);
+		return user;
+	}
+	
+	public User findUserByUsernameAndPassword(String username, String password) {
+		User user = userRepository.findUserByUsernameAndPassword(username, password);
+		return user;
+	}
+	
 	public List<User> allUsers(){
 		return userRepository.findAll();
 	}

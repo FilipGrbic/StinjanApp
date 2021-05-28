@@ -18,6 +18,7 @@ CREATE TABLE `stinjan_app`.`trip` (
   
 CREATE TABLE `stinjan_app`.`parking` (
 	`parkingId` INT NOT NULL AUTO_INCREMENT,
+    `serial_num` INT UNIQUE,
     `available` BIT DEFAULT NULL,
     PRIMARY KEY (`parkingId`)
 );
@@ -96,14 +97,18 @@ CREATE TABLE `stinjan_app`.`reservation` (
     `tripId` INT NOT NULL,
     `parkingId` INT NOT NULL,
     `apartmentId` INT NOT NULL,
+    `userId` INT NOT NULL,
     PRIMARY KEY (`reservationId`),
     KEY `fk_reservation_trip` (`tripId`),
     KEY `fk_reservation_parking` (`parkingId`),
     KEY `fk_reservation_apartment` (`apartmentId`),
+    KEY `fk_reservation_user` (`userId`),
     CONSTRAINT `fk_reservation_trip` FOREIGN KEY (`tripId`) 
     REFERENCES `stinjan_app`.`trip` (`tripId`) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_reservation_parking` FOREIGN KEY (`parkingId`) 
     REFERENCES `stinjan_app`.`parking` (`parkingId`) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT `fk_reservation_apartment` FOREIGN KEY (`apartmentId`) 
-    REFERENCES `stinjan_app`.`apartment` (`apartmentId`) ON DELETE CASCADE ON UPDATE CASCADE
+    REFERENCES `stinjan_app`.`apartment` (`apartmentId`) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT `fk_reservation_user` FOREIGN KEY (`userId`) 
+    REFERENCES `stinjan_app`.`user` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
 );
