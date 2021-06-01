@@ -88,3 +88,13 @@ html,body{
     .linkColor{
         color: #17a2b8;
     }
+    
+    #registerPassMsg{
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        background-color: rgb(255, 173, 173);
+        width: 100%;
+        margin-bottom: 5px;
+        padding-left: 2px;
+        padding-right: 2px;
+        border-radius: .25rem;
+    }

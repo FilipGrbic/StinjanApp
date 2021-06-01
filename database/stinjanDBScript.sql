@@ -79,7 +79,7 @@ CREATE TABLE `stinjan_app`.`user` (
     `city` VARCHAR(50) DEFAULT NULL,
     `address` VARCHAR(50) DEFAULT NULL,
     `email` VARCHAR(50) NOT NULL,
-    `phone` VARCHAR(50) NOT NULL,
+    `phone` VARCHAR(50) DEFAULT NULL,
     `username` VARCHAR(50) NOT NULL,
     `password` VARCHAR(50) NOT NULL,
     `description` VARCHAR(200) DEFAULT NULL,
