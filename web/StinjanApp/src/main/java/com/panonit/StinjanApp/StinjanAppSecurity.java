@@ -50,28 +50,16 @@ public class StinjanAppSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/trip/*","/apartment/*","/lunch/*","/gallery*").permitAll()
+			.antMatchers("/trip/*","/apartment/*","/lunch/*","/gallery*","/user/login","/user/register").permitAll()
+			.antMatchers("/reservation/*").hasAnyRole("Admin","User")
 			.anyRequest()
 			.authenticated()
 			.and()
 		.formLogin()
-			.defaultSuccessUrl("/trip/list", true)
+			.defaultSuccessUrl("/home", true)
 			.and()
 			.logout().permitAll()
 			.and()
 		.httpBasic();
 	}
-	
-	/*
-	@Override
-	@Bean
-	protected UserDetailsService userDetailsService() {
-		UserDetails filipUser = User.builder()
-				.username("admin")
-				.password(bCryptPasswordEncoder.encode("admin"))
-				.roles("ADMIN")
-				.build();
-		
-		return new InMemoryUserDetailsManager(filipUser);
-	}*/
 }

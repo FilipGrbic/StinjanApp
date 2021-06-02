@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +17,8 @@ public class ReservationService {
 		return reservationRepository.findAll();
 	}
 	
-	public Optional<Reservation> getById(Integer reservationId){
-		return reservationRepository.findById(reservationId);
+	public Reservation getById(Integer reservationId){
+		return reservationRepository.findById(reservationId).get();
 	}
 	
 	public Reservation saveReservation(Reservation reservation) {

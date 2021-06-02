@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +17,8 @@ public class TripService {
 		return tripRepository.findAll();
 	}
 	
-	public Optional<Trip> getTripById(Integer tripId) {
-		return tripRepository.findById(tripId);
+	public Trip getTripById(Integer tripId) {
+		return tripRepository.findById(tripId).get();
 	}
 	
 	public Trip saveTrip(Trip trip) {

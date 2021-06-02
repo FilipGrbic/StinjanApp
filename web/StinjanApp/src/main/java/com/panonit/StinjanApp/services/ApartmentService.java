@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +17,8 @@ public class ApartmentService {
 		return apartmentRepository.findAll();
 	}
 	
-	public Optional<Apartment> getById(Integer apartmentId) {
-		return apartmentRepository.findById(apartmentId);
+	public Apartment getById(Integer apartmentId) {
+		return apartmentRepository.findById(apartmentId).get();
 	}
 	
 	public Apartment saveApartment(Apartment apartment) {

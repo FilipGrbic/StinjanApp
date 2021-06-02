@@ -1,7 +1,9 @@
 package com.panonit.StinjanApp.controllers;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.panonit.StinjanApp.models.Apartment;
 import com.panonit.StinjanApp.services.ApartmentService;
@@ -31,7 +35,7 @@ public class ApartmentController {
 	}
 	
 	@GetMapping("/getById/{apartmentId}")
-	public Optional<Apartment> getById(@PathVariable(value = "apartmentId") Integer apartmentId){
+	public Apartment getById(@PathVariable(value = "apartmentId") Integer apartmentId){
 		return apartmentService.getById(apartmentId);
 	}
 	
@@ -57,5 +61,39 @@ public class ApartmentController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@GetMapping(value = "/showApartmentImage/{apartmentId}")
+	public void showApartmentImage(@PathVariable Integer apartmentId, HttpServletResponse response,
+			HttpServletRequest request) {
+
+		try {
+			Apartment apartment = apartmentService.getById(apartmentId);
+			if(apartment.getImage() != null) {
+				response.getOutputStream().write(apartment.getImage());
+				response.getOutputStream().close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping(value = "/uploadApartmentImage/{apartmentId}")
+	public ResponseEntity<String> uploadApartmentImage(@RequestPart(value = "image") MultipartFile file,
+			@PathVariable(value = "apartmentId") Integer apartmentId, HttpServletResponse response,
+			HttpServletRequest request){
+		if (!file.isEmpty())
+			try {
+				byte[] bytes = file.getBytes();
+				
+				Apartment apartment = apartmentService.getById(apartmentId);
+				apartment.setImage(bytes);
+				apartmentService.saveApartment(apartment);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new ResponseEntity<String>("Upload failed", HttpStatus.BAD_REQUEST);
+			}
+		return new ResponseEntity<String>("Upload success", HttpStatus.OK);
 	}
 }

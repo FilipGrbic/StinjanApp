@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +18,22 @@ public class UserService {
 		return user;
 	}
 	
+	public User findUserByEmail(String email) {
+		User user = userRepository.findUserByEmail(email);
+		return user;
+	}
+	
+	public User findUserByUsernameAndPassword(String username, String password) {
+		User user = userRepository.findUserByUsernameAndPassword(username, password);
+		return user;
+	}
+	
 	public List<User> allUsers(){
 		return userRepository.findAll();
 	}
 	
-	public Optional<User> getById(Integer userId){
-		return userRepository.findById(userId);
+	public User getById(Integer userId){
+		return userRepository.findById(userId).get();
 	}
 	
 	public User saveUser(User user) {

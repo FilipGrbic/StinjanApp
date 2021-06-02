@@ -1,20 +1,24 @@
 <div class="container" style="padding-top: 5%;">
-    <h1><b>Travel and meet Istria</b></h1>
+    <h1><b>Travel and meet Istria</b><button type="button" class="btn btn-dark" id="addTripBtn">Add new trip</button></h1>
     <table class="table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">Image</th>
-                <th scope="col">Price (in €)</th>  
+                <th scope="col">Price (in €)</th>
+                <th></th>
+                <th></th>  
             </tr>
         </thead>
         <tbody>
             <tr *ngFor = "let trip of trips">
                 <td>{{trip.title}}</td>
                 <td>{{trip.description}}</td>
-                <td>{{trip.image}}</td>
+                <td id="tripImage">{{trip.image}}</td>
                 <td>{{trip.price}}</td>
+                <td><button type="button" class="btn btn-info">Update</button></td>
+                <td><button type="button" class="btn btn-danger">Delete</button></td>
             </tr>
         </tbody>
     </table>

@@ -1,11 +1,10 @@
 package com.panonit.StinjanApp.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +19,7 @@ import com.panonit.StinjanApp.services.UserService;
 
 @RestController
 @RequestMapping("user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
 	@Autowired
@@ -31,7 +31,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/getById/{userId}")
-	public Optional<User> getById(@PathVariable(value = "userId") Integer userId){
+	public User getById(@PathVariable(value = "userId") Integer userId){
 		return userService.getById(userId);
 	}
 	
@@ -57,5 +57,32 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(null);
+	}
+	
+	@PostMapping("/register")
+	public User registerUser(@RequestBody User user) throws Exception{
+		String emailCheck = user.getEmail();
+		if(emailCheck != null && !"".equals(emailCheck)) {
+			User userReg = userService.findUserByEmail(emailCheck);
+			if(userReg != null) {
+				throw new Exception("User already exists with email: " + emailCheck);
+			}
+		}
+		User userReg = userService.saveUser(user);
+		return userReg;
+	}
+	
+	@PostMapping("/login")
+	public User userLogin(@RequestBody User user) throws Exception{
+		String usernameCheck = user.getUsername();
+		String passwordCheck = user.getPassword();
+		User userLog = null;
+		if(usernameCheck != null && passwordCheck != null) {
+			userLog = userService.findUserByUsernameAndPassword(usernameCheck, passwordCheck);
+		}
+		if(userLog == null) {
+			throw new Exception("Bad credentials!");
+		}
+		return userLog;
 	}
 }

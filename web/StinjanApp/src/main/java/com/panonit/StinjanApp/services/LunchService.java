@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +17,8 @@ public class LunchService {
 		return lunchRepository.findAll();
 	}
 	
-	public Optional<Lunch> getById(Integer lunchId) {
-		return lunchRepository.findById(lunchId);
+	public Lunch getById(Integer lunchId) {
+		return lunchRepository.findById(lunchId).get();
 	}
 	
 	public Lunch saveLunch(Lunch lunch) {

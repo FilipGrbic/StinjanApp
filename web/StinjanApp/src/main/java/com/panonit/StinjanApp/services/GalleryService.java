@@ -1,8 +1,6 @@
 package com.panonit.StinjanApp.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +17,8 @@ public class GalleryService {
 		return galleryRepository.findAll();
 	}
 	
-	public Optional<Gallery> getById(Integer imgId){
-		return galleryRepository.findById(imgId);
+	public Gallery getById(Integer imgId){
+		return galleryRepository.findById(imgId).get();
 	}
 	
 	public Gallery saveImage(Gallery gallery) {
