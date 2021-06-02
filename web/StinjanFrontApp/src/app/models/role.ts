@@ -1,12 +1,10 @@
-import { Deserializable } from "../models/deserializable";
-
-export class Role implements Deserializable{
+export class Role{
     roleId: number;
     name: string;
     description: string;
-
-    deserializable(input: any): this {
-        Object.assign(this, input);
-        return this;
+    constructor(roleId, name, description){
+        this.roleId = roleId;
+        this.name = name;
+        this.description = description;
     }
 }

@@ -1,7 +1,6 @@
 import { Role } from "../models/role";
-import { Deserializable } from "../models/deserializable";
 
-export class User implements Deserializable{
+export class User{
     userId: number;
     role: Role;
     name: string;
@@ -14,10 +13,4 @@ export class User implements Deserializable{
     username: string;
     password: string;
     description: string;
-
-    constructor(){}
-    deserializable(input: any): this {
-        Object.assign(this, input);
-        return this;
-    }
 }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { User } from '../../models/user';
 import { RegistrationService } from '../../services/registration.service';
 import { Router } from '@angular/router';
+import { Role } from 'src/app/models/role';
 
 @Component({
   selector: 'app-register',
@@ -13,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   user = new User();
   msg="";
+  role = new Role(2, "User", "user");
 
   constructor(private registrationService: RegistrationService, private router: Router) { }
 
@@ -20,7 +22,7 @@ export class RegisterComponent implements OnInit {
   }
   
   registerUser(){
-    this.user.role.roleId = 2;
+    this.user.role = this.role;
     this.registrationService.registerUserFromRemote(this.user).subscribe(
       data => {
         this.msg = "Registration successful";
