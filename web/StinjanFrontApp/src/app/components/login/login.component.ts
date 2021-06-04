@@ -21,10 +21,11 @@ export class LoginComponent implements OnInit {
   }
 
     loginUser(){ 
-      this.registrationService.loginUserFromRemote(this.user).subscribe(
-        data =>{ 
-          console.log("response recieced");
+      this.registrationService.loginUser(this.user).subscribe(
+        data =>{
+          console.log(data);
           this.router.navigate(['/home']);
+          
         },
         error => this.msg="Bad credentials, please enter valid username and password"
       )

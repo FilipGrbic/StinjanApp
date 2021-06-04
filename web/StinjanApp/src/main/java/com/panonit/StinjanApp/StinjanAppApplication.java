@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@ComponentScan({"com.panonit.StinjanApp", "com.panonit.StinjanApp.controllers","com.panonit.StinjanApp.services"})
+@ComponentScan({"com.panonit.StinjanApp.constants","com.panonit.StinjanApp", "com.panonit.StinjanApp.controllers","com.panonit.StinjanApp.services"})
 @EntityScan("com.panonit.StinjanApp.models")
 @EnableJpaRepositories("com.panonit.StinjanApp.repositories")
 @SpringBootApplication

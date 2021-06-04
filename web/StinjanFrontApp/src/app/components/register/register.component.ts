@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   
   registerUser(){
     this.user.role = this.role;
-    this.registrationService.registerUserFromRemote(this.user).subscribe(
+    this.registrationService.registerUser(this.user).subscribe(
       data => {
         this.msg = "Registration successful";
         this.router.navigate(['/login']);

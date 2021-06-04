@@ -50,7 +50,7 @@ public class StinjanAppSecurity extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception{
 		http.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/trip/*","/apartment/*","/lunch/*","/gallery*","/user/login","/user/register").permitAll()
+			.antMatchers("/trip/list","/apartment/list","/lunch/list","/gallery*","/user/login","/user/register").permitAll()
 			.antMatchers("/reservation/*").hasAnyRole("Admin","User")
 			.anyRequest()
 			.authenticated()

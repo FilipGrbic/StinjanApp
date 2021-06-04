@@ -18,6 +18,7 @@ import { AboutComponent } from './components/about/about.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
+import { RegistrationService } from './services/registration.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FormsModule } from '@angular/forms';
   providers: [
     TripsService,
     LunchService,
-    ApartmentsService
+    ApartmentsService,
+    RegistrationService
   ],
   bootstrap: [AppComponent]
 })

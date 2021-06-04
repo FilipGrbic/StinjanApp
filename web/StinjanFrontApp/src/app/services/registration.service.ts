@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { User } from '../models/user'
 
 @Injectable({
@@ -8,13 +7,16 @@ import { User } from '../models/user'
 })
 export class RegistrationService {
 
+  private registerUrl = "http://localhost:4063/user/register"
+  private loginUrl = "http://localhost:4063/user/login"
+
   constructor(private http: HttpClient) { }
 
-  public loginUserFromRemote(user: User):Observable<any>{
-    return this.http.post<any>("http://localhost:4063/user/login", user)
+  public loginUser(user: User){
+    return this.http.post<any>(this.loginUrl, user);
   }
 
-  public registerUserFromRemote(user: User):Observable<any>{
-    return this.http.post<any>("http://localhost:4063/user/register", user)
+  public registerUser(user: User){
+    return this.http.post<any>(this.registerUrl, user)
   }
 }
